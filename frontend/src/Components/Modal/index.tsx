@@ -3,7 +3,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import MUIButton from "@mui/material/Button";
+// import MUIButton from "@mui/material/Button";
 
 const style = {
     position: "absolute" as "absolute",
@@ -16,7 +16,6 @@ const style = {
     boxShadow: 24,
     p: 4
 };
-
 const CustomModal = ({ children }) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
