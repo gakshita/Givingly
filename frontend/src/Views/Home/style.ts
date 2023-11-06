@@ -37,7 +37,7 @@ export const CategoryContainer = styled.div`
         text-transform: capitalize;
     }
     svg {
-        border-radius: 5px;
+        border-radius: 10px;
         border: 1px solid #000;
         margin: auto;
         font-size: 22px;
@@ -71,7 +71,7 @@ export const ProjectBox = styled.div`
     margin-bottom: 30px;
     cursor: pointer;
     .proj-img {
-        border-radius: 5px;
+        border-radius: 10px;
         background-color: ${({ theme }) => theme.color.color1};
         width: 425px;
         height: 260px;
@@ -131,14 +131,14 @@ export const SmallProjectBox = styled.div`
     .empty {
         background-color: ${({ theme }) => theme.color.color2};
         height: 100%;
-        border-radius: 5px;
+        border-radius: 10px;
         display: flex;
         place-content: center;
         place-items: center;
         font-weight: 500;
     }
     .proj-img {
-        border-radius: 5px;
+        border-radius: 10px;
         background-color: ${({ theme }) => theme.color.color2};
         width: 245px;
         height: 140px;
