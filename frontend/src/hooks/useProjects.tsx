@@ -9,9 +9,9 @@ import {
 } from "../Views/Home/types";
 
 const useProjects = () => {
+    const [rawProjects, setRawProjects] = useState<ProjectType[]>([]);
     const [projects, setProjects] = useState<CategorizedProjectsType>({});
     const [topProject, setTopProject] = useState<ProjectType>();
-
     const sortProjects = (all_projects: ProjectType[]): ProjectType[] => {
         return all_projects.sort((a, b) => {
             let goal_reached_a = a["raised"] / a["project_info"]["goal"];
@@ -54,14 +54,14 @@ const useProjects = () => {
         let sortedProjects = sortProjects(response.data).reverse();
 
         setTopProject(sortedProjects[0]);
-
+        setRawProjects(response.data);
         setProjects(filteredProjects);
     };
     useEffect(() => {
         fetchProjects();
     }, []);
 
-    return { projects, topProject };
+    return { projects, topProject, rawProjects };
 };
 
 export default useProjects;

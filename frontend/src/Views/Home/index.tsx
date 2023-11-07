@@ -10,9 +10,11 @@ import { useState } from "react";
 import useProjects from "../../hooks/useProjects";
 import { categories } from "src/config";
 import { ProjectType, CategoryProps, ProjectOfTheWeekProps } from "./types";
+import { useNavigate } from "react-router-dom";
 
 const Categories: React.FC<CategoryProps> = ({ projects }) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
+    const navigate = useNavigate();
     return (
         <div>
             <h1>Categories</h1>
@@ -44,7 +46,12 @@ const Categories: React.FC<CategoryProps> = ({ projects }) => {
                     projects[selectedCategory].map(
                         (project: ProjectType, index: number) => {
                             return (
-                                <SmallProjectBox key={index}>
+                                <SmallProjectBox
+                                    key={index}
+                                    onClick={() =>
+                                        navigate(`/project/${project.p_id}`)
+                                    }
+                                >
                                     <div className="proj-img">
                                         <img
                                             src={`/${project.project_info.categories[0]}.svg`}
@@ -102,11 +109,14 @@ const Categories: React.FC<CategoryProps> = ({ projects }) => {
 };
 
 const ProjectOfTheWeek: React.FC<ProjectOfTheWeekProps> = ({ topProject }) => {
+    const navigate = useNavigate();
     return (
         <div>
             <h1>Project of the week</h1>
             {topProject && (
-                <ProjectBox>
+                <ProjectBox
+                    onClick={() => navigate(`/project/${topProject.p_id}`)}
+                >
                     <div className="proj-img">
                         <img
                             src={`/${topProject.project_info.categories[0]}.svg`}

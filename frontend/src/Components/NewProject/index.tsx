@@ -8,6 +8,7 @@ import axios from "axios";
 import { BASEURL } from "src/config";
 import { CircularProgress } from "@mui/material";
 import { categories } from "src/config";
+import Completed from "@Components/Completed";
 
 type InputType = {
     creator: string;
@@ -26,7 +27,7 @@ const initialState: InputType = {
         name: "",
         description: "",
         goal: 100,
-        categories: ["education"]
+        categories: []
     }
 };
 const ProjectForm = () => {
@@ -44,33 +45,36 @@ const ProjectForm = () => {
         setCompleted(true);
         setProcessing(false);
     };
+    const addSubtractCategory = (category: string) => {
+        if (inputs.project_info.categories.includes(category)) {
+            setInputs({
+                ...inputs,
+                project_info: {
+                    ...inputs.project_info,
+                    categories: inputs.project_info.categories.filter(
+                        (c) => c !== category
+                    )
+                }
+            });
+        } else {
+            setInputs({
+                ...inputs,
+                project_info: {
+                    ...inputs.project_info,
+                    categories: [...inputs.project_info.categories, category]
+                }
+            });
+        }
+    };
     return completed ? (
-        <div className="wrapper">
-            {" "}
-            <svg
-                className="checkmark"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 52 52"
-            >
-                {" "}
-                <circle
-                    className="checkmark__circle"
-                    cx="26"
-                    cy="26"
-                    r="25"
-                    fill="none"
-                />{" "}
-                <path
-                    className="checkmark__check"
-                    fill="none"
-                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
-                />
-            </svg>
-            <h2>
-                Project added <br />
-                successfully!
-            </h2>
-        </div>
+        <Completed
+            text={
+                <>
+                    Project added <br />
+                    successfully!
+                </>
+            }
+        />
     ) : (
         <div>
             <h1>
@@ -157,7 +161,19 @@ const ProjectForm = () => {
                         <div className="categories">
                             {categories.map((category, index) => {
                                 return (
-                                    <div className="category" key={index}>
+                                    <div
+                                        className={`category ${
+                                            inputs.project_info.categories.includes(
+                                                category.category
+                                            ) && "selected"
+                                        }`}
+                                        key={index}
+                                        onClick={() =>
+                                            addSubtractCategory(
+                                                category.category
+                                            )
+                                        }
+                                    >
                                         {category.category}
                                     </div>
                                 );

@@ -2,7 +2,8 @@
     "compilerOptions": {
         "paths": {
             "@Views/*": ["./src/Views/*"],
-            "@Components/*": ["./src/Components/*"]
+            "@Components/*": ["./src/Components/*"],
+            "@Utils/*": ["./src/utils/*"]
         },
         "target": "ESNext",
         "useDefineForClassFields": true,

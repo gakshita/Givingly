@@ -2,6 +2,7 @@ export interface ICategoriesProps {
     projects: any;
 }
 export type ProjectType = {
+    p_id: number;
     raised: number;
     project_info: {
         name: string;
