@@ -63,6 +63,7 @@ export const CategoryContainer = styled.div`
 export const Flex = styled.div`
     display: flex;
     column-gap: 15px;
+    flex-wrap: wrap;
 `;
 
 export const ProjectBox = styled.div`
@@ -123,7 +124,8 @@ export const SmallProjectBox = styled.div`
     display: flex;
     flex-direction: column;
     column-gap: 40px;
-    // margin-bottom: 30px;
+    // row-gap: 20px;
+    margin-bottom: 30px;
     cursor: pointer;
     width: 245px;
     height: 345px;

@@ -3,32 +3,31 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-// import MUIButton from "@mui/material/Button";
 
 const style = {
     position: "absolute" as "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 600,
     bgcolor: "background.paper",
-    border: "2px solid #000",
     boxShadow: 24,
+    borderRadius: "16px",
     p: 4
 };
-const CustomModal = ({ children }) => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+type ChildrenType = {
+    children: React.ReactElement;
+    showModal: boolean;
+    setShowModal: (show: boolean) => void;
+};
+const CustomModal = ({ showModal, setShowModal, children }: ChildrenType) => {
     return (
         <div>
-            {/* <MUIButton onClick={handleOpen}>Open modal</MUIButton> */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleClose}
+                open={showModal}
+                onClose={() => setShowModal(false)}
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
@@ -37,7 +36,7 @@ const CustomModal = ({ children }) => {
                     }
                 }}
             >
-                <Fade in={open}>
+                <Fade in={showModal}>
                     <Box sx={style}>{children}</Box>
                 </Fade>
             </Modal>

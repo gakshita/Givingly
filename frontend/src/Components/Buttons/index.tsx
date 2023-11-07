@@ -5,7 +5,7 @@ type ButtonProps = {
     width?: string;
     fontSize?: string;
     height?: string;
-    text: string;
+    text: string | React.ReactElement;
     func: () => void;
     disabled?: boolean;
     className?: string;
@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
             className={`${disabled && "custom-disabled"} ${className}`}
             width={width}
             fontSize={fontSize ? theme.fontSize[fontSize] : "16px"}
-            height={height}
+            height={height ? height : "40px"}
             onClick={() => func()}
             disabled={disabled}
         >

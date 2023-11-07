@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASEURL } from "src/config";
-import { categories } from "../Views/Home/confg";
+import { categories } from "src/config";
 import {
     ProjectType,
     CategoryProps,

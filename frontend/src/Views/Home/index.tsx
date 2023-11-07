@@ -8,7 +8,7 @@ import {
 import { BorderLinearProgress } from "@Components/Progressbar";
 import { useState } from "react";
 import useProjects from "../../hooks/useProjects";
-import { categories } from "./confg";
+import { categories } from "src/config";
 import { ProjectType, CategoryProps, ProjectOfTheWeekProps } from "./types";
 
 const Categories: React.FC<CategoryProps> = ({ projects }) => {
