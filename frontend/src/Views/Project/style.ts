@@ -37,7 +37,7 @@ export const ProjectBox = styled.div`
         border-radius: 10px;
         background-color: ${({ theme }) => theme.color.color1};
         min-width: 500px;
-        height: 600px;
+        height: 700px;
         background-color: ${({ theme }) => theme.color.color2};
         display: flex;
 
