@@ -76,4 +76,35 @@ export const Container = styled.div`
     .back-btn {
         cursor: pointer;
     }
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 10px;
+        row-gap: 10px;
+
+        .category {
+            text-transform: capitalize;
+            height: 20px;
+            padding: 2px 10px;
+            cursor: pointer;
+            background-color: ${({ theme }) => theme.color.secondary};
+
+            font-size: ${({ theme }) => theme.fontSize.sm} !important;
+            border-radius: 5px;
+            border: 1px solid ${({ theme }) => theme.color.primary};
+            transition: background-color 0.2s ease-in-out;
+        }
+        .category:hover {
+            border: none;
+            background-color: ${({ theme }) => theme.color.color2};
+            transition: background-color 0.2s ease-in-out;
+            font-weight: 500;
+        }
+        .selected {
+            border: none;
+            background-color: ${({ theme }) => theme.color.color2};
+            transition: background-color 0.2s ease-in-out;
+            font-weight: 500;
+        }
+    }
 `;
