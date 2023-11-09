@@ -18,3 +18,4 @@ opentelemetry-exporter-otlp
 slowapi
 retry
 jsonfield
+razorpay

@@ -48,6 +48,8 @@ class Settings(BaseSettings):
     SETTLEMENT_FEE_SIGNATURE_EXPIRATION: int = 30
 
     SPREAD_SIGNER_PK: str = ""
+    RAZORPAY_KEY: str = ""
+    RAZORPAY_SECRET: str = ""
 
 
 settings = Settings()

@@ -3,6 +3,7 @@ import logging
 import time
 from contextvars import ContextVar
 from typing import Awaitable, Callable, List, Optional, TypeVar, Union
+import razorpay
 
 import redis.asyncio as redis
 from pipe import select
@@ -109,3 +110,16 @@ async def create_project(
     )
     result = await Project_Pydantic.from_tortoise_orm(project)
     return _(result.dict())
+
+
+@router.post("/payment/create/order")
+async def create_order(amount, currency, receipt):
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY, settings.RAZORPAY_SECRET))
+    DATA = {
+        "amount": amount,
+        "currency": currency,
+        "receipt": receipt,
+        "notes": {"key1": "value3", "key2": "value2"},
+    }
+    res = client.order.create(data=DATA)
+    return _(res)
