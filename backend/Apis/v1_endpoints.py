@@ -123,3 +123,15 @@ async def create_order(amount, currency, receipt):
     }
     res = client.order.create(data=DATA)
     return _(res)
+
+
+@router.post("/donate")
+async def donate(amount, project_id, donar):
+    donation = await Donation.create(
+        donar=donar,
+        project_id=project_id,
+        contribution=amount,
+        timestamp=int(time.time()),
+    )
+    result = await Donation_Pydantic.from_tortoise_orm(donation)
+    return _(result.dict())
