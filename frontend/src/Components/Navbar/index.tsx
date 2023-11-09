@@ -43,14 +43,14 @@ const Navbar: React.FC = () => {
                     >
                         Home
                     </div>
-                    <div
+                    {/* <div
                         className="tab hover-underline-animation"
                         onClick={() => {
                             navigate("projects");
                         }}
                     >
                         Projects
-                    </div>
+                    </div> */}
                     <Button
                         text={
                             location.pathname == "/"
