@@ -35,7 +35,7 @@ const initialState: InputType = {
 
 export default function Donation() {
     const { showModal, setShowModal } = useDonationModal();
-    const [donationAmount, setDonationAmount] = useState(10);
+    const [donationAmount, setDonationAmount] = useState(100);
     const [processing, setProcessing] = useState(false);
     const [completed, setCompleted] = useState(false);
     const { onPay } = usePayments();
