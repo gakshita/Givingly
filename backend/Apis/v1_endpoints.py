@@ -126,7 +126,7 @@ async def create_order(amount, currency, receipt):
 
 
 @router.post("/donate")
-async def donate(amount, project_id, donar):
+async def donate(amount: int, project_id, donar):
     donation = await Donation.create(
         donar=donar,
         project_id=project_id,
