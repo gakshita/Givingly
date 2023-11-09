@@ -133,5 +133,11 @@ async def donate(amount, project_id, donar):
         contribution=amount,
         timestamp=int(time.time()),
     )
+    project_data = await Project.filter(p_id=project_id).first()
+
+    if project_data:
+        await project_data.update_from_dict({"raised": project_data.raised + amount})
+        await project_data.save()
+
     result = await Donation_Pydantic.from_tortoise_orm(donation)
     return _(result.dict())
