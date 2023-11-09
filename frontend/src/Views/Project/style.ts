@@ -133,4 +133,15 @@ export const ProjectBox = styled.div`
             margin-top: 30px;
         }
     }
+    .goal-reached {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+        font-weight: 600;
+        display: flex;
+        column-gap: 5px;
+        .smiley {
+            margin: auto 0;
+            color: #4efd80;
+            font-size: 30px;
+        }
+    }
 `;

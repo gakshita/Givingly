@@ -71,3 +71,6 @@ input[type="number"] {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+.custom-disabled {
+    background-color: grey !important;
+}

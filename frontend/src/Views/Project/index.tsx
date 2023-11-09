@@ -8,6 +8,7 @@ import { intlFormatDistance } from "date-fns";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Button from "@Components/Buttons";
 import { useDonationModal } from "src/context/GlobalContext";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 const Project: React.FC = () => {
     const location = useLocation();
     const { rawProjects: projects } = useProjects();
@@ -17,7 +18,6 @@ const Project: React.FC = () => {
 
     useEffect(() => {
         if (!projects) return;
-        console.log({ projects });
         setProject(projects.filter((proj) => proj.p_id == projectId)[0]);
     }, [projectId, projects]);
 
@@ -80,12 +80,22 @@ const Project: React.FC = () => {
                             </div>
                         </div>
                         <hr />
-                        <Button
-                            text="Fund this Project"
-                            width="50%"
-                            className="btn"
-                            func={() => setShowModal(true)}
-                        />{" "}
+                        {project.raised === project.project_info.goal ? (
+                            <div className="goal-reached">
+                                <SentimentVerySatisfiedIcon className="smiley" />
+                                Goal Reached
+                            </div>
+                        ) : (
+                            <Button
+                                disabled={
+                                    project.raised === project.project_info.goal
+                                }
+                                text="Fund this Project"
+                                width="50%"
+                                className="btn"
+                                func={() => setShowModal(true)}
+                            />
+                        )}
                     </div>
                 </ProjectBox>
             )}

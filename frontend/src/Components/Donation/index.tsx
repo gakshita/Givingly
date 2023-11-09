@@ -3,13 +3,15 @@ import { Container } from "./style";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CustomModal from "@Components/Modal";
 import { useDonationModal } from "src/context/GlobalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASEURL } from "src/config";
 import { CircularProgress } from "@mui/material";
 import { categories } from "src/config";
 import Completed from "@Components/Completed";
-
+import usePayments from "src/hooks/usePayments";
+import { useLocation } from "react-router-dom";
+import { useRefresher } from "src/context/Refresher";
 type InputType = {
     creator: string;
     expiration: string;
@@ -33,8 +35,33 @@ const initialState: InputType = {
 
 export default function Donation() {
     const { showModal, setShowModal } = useDonationModal();
-    const [donationAmount, setDonationAmount] = useState(100);
+    const [donationAmount, setDonationAmount] = useState(10);
+    const [processing, setProcessing] = useState(false);
     const [completed, setCompleted] = useState(false);
+    const { onPay } = usePayments();
+    const location = useLocation();
+    const projectId = parseInt(location.pathname.split("/")[2]);
+    const { forceRefresh } = useRefresher();
+
+    const afterPay = async (res: any) => {
+        setProcessing(false);
+        await axios.post(`${BASEURL}donate`, null, {
+            params: {
+                donar: "akshita",
+                amount: donationAmount,
+                project_id: projectId
+            }
+        });
+        setCompleted(true);
+        forceRefresh();
+    };
+
+    const onCancel = () => {
+        setProcessing(false);
+    };
+    useEffect(() => {
+        setCompleted(false);
+    }, [showModal]);
 
     return (
         <CustomModal showModal={showModal} setShowModal={setShowModal}>
@@ -79,8 +106,27 @@ export default function Donation() {
                                 </div>
                             </div>
                             <Button
-                                text="Pay now"
-                                func={() => {}}
+                                text={
+                                    processing ? (
+                                        <CircularProgress
+                                            className="loader"
+                                            size={"22px"}
+                                        />
+                                    ) : (
+                                        "Pay now"
+                                    )
+                                }
+                                func={() => {
+                                    setProcessing(true);
+                                    onPay(
+                                        donationAmount.toString(),
+                                        "INR",
+                                        "receipt",
+                                        afterPay,
+                                        onCancel
+                                    );
+                                    // afterPay({});
+                                }}
                                 width="100%"
                                 className="donate-btn"
                             />

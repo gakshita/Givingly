@@ -91,6 +91,7 @@ export const ProjectBox = styled.div`
         row-gap: 15px;
         max-width: 420px;
         justify-content: center;
+        width: 100%;
 
         .title {
             // font-size: ${({ theme }) => theme.fontSize.lg};

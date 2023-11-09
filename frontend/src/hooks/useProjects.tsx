@@ -7,11 +7,13 @@ import {
     CategoryProps,
     CategorizedProjectsType
 } from "../Views/Home/types";
+import { useRefresher } from "src/context/Refresher";
 
 const useProjects = () => {
     const [rawProjects, setRawProjects] = useState<ProjectType[]>([]);
     const [projects, setProjects] = useState<CategorizedProjectsType>({});
     const [topProject, setTopProject] = useState<ProjectType>();
+    const { refresh, fastRefresher } = useRefresher();
     const sortProjects = (all_projects: ProjectType[]): ProjectType[] => {
         return all_projects.sort((a, b) => {
             let goal_reached_a = a["raised"] / a["project_info"]["goal"];
@@ -60,6 +62,10 @@ const useProjects = () => {
     useEffect(() => {
         fetchProjects();
     }, []);
+
+    useEffect(() => {
+        fetchProjects();
+    }, [refresh]);
 
     return { projects, topProject, rawProjects };
 };
