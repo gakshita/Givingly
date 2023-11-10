@@ -119,7 +119,7 @@ export default function Donation() {
                                 func={() => {
                                     setProcessing(true);
                                     onPay(
-                                        donationAmount.toString(),
+                                        donationAmount,
                                         "INR",
                                         "receipt",
                                         afterPay,

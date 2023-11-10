@@ -5,7 +5,7 @@ import { loadScript } from "@Utils/loadScript";
 
 const usePayments = () => {
     const createOrder = async (
-        amount: string,
+        amount: number,
         currency: string,
         receipt: string
     ): Promise<string> => {
@@ -26,7 +26,7 @@ const usePayments = () => {
     };
 
     const checkout = async (
-        amount: string,
+        amount: number,
         currency: string,
         order_id: string,
         afterPay: (res: any) => void,
@@ -34,7 +34,7 @@ const usePayments = () => {
     ) => {
         var options = {
             key: import.meta.env.VITE_RAZORPAY_KEY,
-            amount: amount,
+            amount: (amount * 100).toString(),
             currency: currency,
             name: "Givingly",
             description: "Thankyou for your donation",
@@ -67,7 +67,7 @@ const usePayments = () => {
     };
 
     const onPay = async (
-        amount: string,
+        amount: number,
         currency: string,
         receipt: string,
         afterPay: (res: any) => void,

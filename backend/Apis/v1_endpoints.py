@@ -113,10 +113,10 @@ async def create_project(
 
 
 @router.post("/payment/create/order")
-async def create_order(amount, currency, receipt):
+async def create_order(amount: int, currency, receipt):
     client = razorpay.Client(auth=(settings.RAZORPAY_KEY, settings.RAZORPAY_SECRET))
     DATA = {
-        "amount": amount,
+        "amount": amount * 100,
         "currency": currency,
         "receipt": receipt,
         "notes": {"key1": "value3", "key2": "value2"},
