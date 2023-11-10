@@ -33,7 +33,7 @@ const usePayments = () => {
         onCancel: () => void
     ) => {
         var options = {
-            key: "rzp_test_26yMwKnYtNV110",
+            key: import.meta.env.VITE_RAZORPAY_KEY,
             amount: amount,
             currency: currency,
             name: "Givingly",
